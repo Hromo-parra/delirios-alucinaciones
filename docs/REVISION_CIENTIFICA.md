@@ -37,4 +37,4 @@ Las decisiones de evaluación y abordaje se apoyan en las fuentes enlazadas en c
 
 ## Fuentes
 
-Las 11 fuentes están enlazadas en la bibliografía pública de `index.html`. La base incluye OMS, NIMH, NICE y revisiones indexadas en PubMed. Revisión web realizada el 6 de octubre de 2026. No se inventaron ediciones de manuales ni referencias incompletas mencionadas en las diapositivas.
+Las 12 fuentes están enlazadas en la bibliografía pública de `index.html`. La base incluye OMS, NIMH, NICE y revisiones indexadas en PubMed. Revisión web realizada el 6 de octubre de 2026. No se inventaron ediciones de manuales ni referencias incompletas mencionadas en las diapositivas.
