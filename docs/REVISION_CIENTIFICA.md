@@ -37,4 +37,15 @@ Las decisiones de evaluación y abordaje se apoyan en las fuentes enlazadas en c
 
 ## Fuentes
 
-Las 12 fuentes están enlazadas en la bibliografía pública de `index.html`. La base incluye OMS, NIMH, NICE y revisiones indexadas en PubMed. Revisión web realizada el 6 de octubre de 2026. No se inventaron ediciones de manuales ni referencias incompletas mencionadas en las diapositivas.
+Las 13 fuentes están enlazadas en la bibliografía pública de `index.html`. La base incluye OMS, NIMH, NICE y revisiones indexadas en PubMed. Revisión web realizada el 6 de octubre de 2026. No se inventaron ediciones de manuales ni referencias incompletas mencionadas en las diapositivas.
+
+
+## Ampliación del 15 de octubre de 2026: entrevista progresiva
+
+Nuevo caso ficticio de Alex, 26 años, independiente de los ocho casos originales. Incluye relato inicial, cronología, repercusión, apoyo autorizado, fenomenología, estado mental, sueño, ánimo, sustancias, antecedentes médicos y seguridad. El cierre mantiene el diagnóstico específico abierto.
+
+Se contrastaron las recomendaciones de evaluación integral de NICE CG178, el panorama de NIMH y las recomendaciones de comunicación y participación de NICE CG136. Los diálogos y la organización por etapas son una elaboración docente propia. No se atribuyen a estas fuentes como instrumentos validados.
+
+La evaluación distingue respuestas adecuadas a las alternativas del ejercicio y datos realmente explorados. Conserva el primer intento y permite revisión. Las preguntas omitidas siguen señaladas aunque se haya visto la solución. Una negación de intención de daño no se transforma en una clasificación automática de riesgo. No hay prescripciones ni generación de diagnósticos.
+
+Las guías NICE se verificaron mediante resultados de búsqueda oficiales (el acceso directo a algunas páginas devolvió 403). El ejercicio enlaza las fuentes para consulta. La elección de dos preguntas por bloque, los tiempos estimados y la rúbrica no tienen validación psicométrica.

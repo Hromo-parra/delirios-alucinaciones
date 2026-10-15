@@ -19,3 +19,31 @@ Fecha: 6 de octubre de 2026.
 La impresión está implementada para incluir los ocho casos y preservar la selección al volver a la página. No se verificó una impresión física.
 
 Para confirmar la publicación hay que comprobar el último build de GitHub Pages y la ruta pública. El resultado de esa comprobación se comunica en la entrega, para no confundir la validación local con el estado del servidor.
+
+## Versión 1.1.0: entrevista progresiva (15 de octubre de 2026)
+
+Verificación en navegador local:
+
+- Inicio en modo estudiante sin claves visibles. Al activar docente aparecen el caso completo y la guía.
+- Control local de modo sincronizado con el de cabecera. Cambiar de modo conserva preguntas, decisiones y nota.
+- Avance bloqueado antes de dos preguntas del bloque. La pregunta de seguridad no cuenta artificialmente para este mínimo y está accesible desde el inicio.
+- Recorrido parcial: respuestas, registro y hallazgos coherentes. Retroalimentación para opción adecuada e inadecuada.
+- Primera selección conservada después de revisarla. Ejemplo: una opción incorrecta revisada más dos adecuadas produce 2/3 en primer intento.
+- Texto libre conservado entre modos y mostrado literalmente, sin interpretar etiquetas HTML. Límite de 2000 caracteres.
+- Omisiones reflejadas en la rúbrica y junto a las decisiones, incluso con opciones adecuadas.
+- Recorrido completo: las doce preguntas de bloques y la pregunta de seguridad producen cinco dimensiones exploradas.
+- Omisión de seguridad detectada; al volver, preguntar y terminar, la devolución se actualiza sin perder decisiones.
+- Pregunta elegida con Enter. Controles nativos de radio y foco conservado al seleccionar.
+- Caso completo y seguimiento ficticio disponibles al finalizar.
+- Reinicio cancelado conserva el avance; confirmarlo vuelve al comienzo.
+- Búsqueda de Capgras, cambio al caso original 8 y respuesta a pregunta 1 de la autoevaluación siguen funcionando.
+- Vistas de 390 y 1280 px: ancho del documento igual al viewport, sin desbordamiento horizontal. Sin IDs duplicados ni destinos internos ausentes.
+- Inspección visual de la simulación en ambas disposiciones. Consola sin errores ni advertencias tras los recorridos.
+
+Verificación automática:
+
+- Cuatro pruebas de integridad del contenido con `node --test tests/interview-content.test.cjs`: todas aprobadas.
+- Sintaxis de los cuatro scripts comprobada con `node --check`.
+- `git diff --check` sin errores.
+
+Límites: no se hizo prueba con lector de pantalla real, impresión física ni evaluación de eficacia educativa. La rúbrica no tiene validación psicométrica. Los resultados locales anteriores no sustituyen la comprobación de la publicación final.
