@@ -9,10 +9,14 @@
   const h = value => String(value).replace(/[&<>"']/g, c => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
   }[c]));
-  const allQuestions = [INTERVIEW.safety, ...INTERVIEW.questions];
-  const questionById = new Map(allQuestions.map(q => [q.id, q]));
+  let INTERVIEW = INTERVIEWS[0];
+  let allQuestions, questionById;
+  const selectContent = () => { allQuestions = [INTERVIEW.safety, ...INTERVIEW.questions]; questionById = new Map(allQuestions.map(q => [q.id, q])); };
+  selectContent();
   const freshState = () => ({phase: 0, asked: [], choices: {}, first: {}, note: '', confirmReset: false});
+  const states = new Map();
   let state = freshState();
+  states.set(INTERVIEW.id, state);
   let teacherMode = document.querySelector('#teacher').checked;
   const modeLabel = () => teacherMode ? 'Modo docente' : 'Modo estudiante';
   const currentStage = () => INTERVIEW.stages[state.phase - 1];
@@ -31,11 +35,11 @@
     const entries = state.asked.map(id => {
       const q = questionById.get(id);
       return `<article class="interview-exchange"><h4>Tu pregunta</h4><p>${h(q.label)}</p>
-        <blockquote><span>Alex / datos del encuentro</span>${h(q.response)}</blockquote>
+        <blockquote><span>${h(INTERVIEW.person)} / datos del encuentro</span>${h(q.response)}</blockquote>
         <details><summary>Qué aporta esta pregunta</summary><p>${h(q.feedback)}</p></details></article>`;
     }).join('');
     return `<details class="interview-transcript" id="interview-transcript"><summary>Registro de la entrevista (${state.asked.length} preguntas)</summary>
-      ${entries || '<p class="subtle">Aquí aparecerán las preguntas que elijas y las respuestas de Alex.</p>'}</details>`;
+      ${entries || '<p class="subtle">Aquí aparecerán las preguntas que elijas y las respuestas del caso.</p>'}</details>`;
   }
 
   function evidence() {
@@ -68,7 +72,7 @@
       <div class="interview-instructions"><h4>Tu tarea</h4><ol>
       <li>Elige preguntas y escucha las respuestas.</li><li>Recoge datos antes de formular una hipótesis.</li>
       <li>Compara alternativas y explica qué falta.</li></ol>
-      <p>En cada bloque puedes elegir el orden de las preguntas. Explora al menos dos para avanzar. Puedes volver y completar información.</p>
+      <p>Tras cada pregunta verás qué información aporta. En cada bloque puedes elegir el orden de las preguntas. Explora al menos dos para avanzar. Puedes volver y completar información.</p>
       <button type="button" class="primary" data-action="start">Comenzar entrevista</button></div></div>`;
   }
 
@@ -78,7 +82,7 @@
     const latest = questionById.get(state.asked[state.asked.length - 1]);
     return `<div class="interview-layout"><div><p class="eyebrow">BLOQUE ${state.phase} DE 3</p>
       <h3 id="interview-stage-title" tabindex="-1">${h(stage.title)}</h3><p>${h(stage.goal)}</p>
-      ${latest ? `<div class="interview-latest"><h4>Última respuesta de Alex</h4>
+      ${latest ? `<div class="interview-latest"><h4>Última respuesta del caso</h4>
         <blockquote>${h(latest.response)}</blockquote><p><strong>Qué aporta:</strong> ${h(latest.feedback)}</p></div>` : ''}
       <div class="interview-questions">${stage.questions.map(questionButton).join('')}</div>
       <p class="subtle">${count} de ${stage.questions.length} preguntas exploradas en este bloque. Para avanzar, elige al menos dos.</p>
@@ -86,9 +90,9 @@
       <button type="button" class="primary" data-action="next" ${count < 2 ? 'disabled' : ''}>
         ${state.phase === 3 ? 'Construir mi interpretación' : 'Continuar al siguiente bloque'}</button></div></div>
       <aside class="interview-safety"><h4>Seguridad desde el inicio</h4>
-      <p>No necesitas esperar al final para explorar cómo se encuentra Alex.</p>${questionButton('safety')}
+      <p>No necesitas esperar al final para explorar cómo se encuentra la persona.</p>${questionButton('safety')}
       <p class="subtle">Si hubiera peligro inmediato o deterioro médico agudo, la prioridad sería atención urgente. Este recurso no calcula un nivel de riesgo.</p></aside></div>
-      ${evidence()}${transcript()}`;
+      ${INTERVIEW.id === 'acute' ? `<div class="interview-feedback" role="note"><strong>Prioridad de este caso: atención médica urgente.</strong><p>La confusión aguda ya descrita justifica solicitar ayuda. Puedes pasar ahora a decidir cómo comunicar los hallazgos; las preguntas pendientes aparecerán en la devolución.</p><button type="button" class="primary" data-action="urgent">Priorizar atención y decidir con los datos disponibles</button></div>` : ''}${evidence()}${transcript()}`;
   }
 
   function decisionFeedback(d) {
@@ -149,7 +153,7 @@
 
   function render(focusTarget) {
     const phaseLabels = ['Inicio', ...INTERVIEW.stages.map(s => s.title), 'Interpretar', 'Devolución'];
-    root.innerHTML = `<div class="interview-topline"><p class="interview-mode">${modeLabel()}</p>
+    root.innerHTML = `<label for="interview-select">Elegir entrevista (cada una conserva su avance en esta pestaña)</label><select id="interview-select">${INTERVIEWS.map(c => `<option value="${h(c.id)}" ${c.id === INTERVIEW.id ? 'selected' : ''}>${h(c.person)} · ${h(c.title)}</option>`).join('')}</select><div class="interview-topline"><p class="interview-mode">${modeLabel()}</p>
       <div class="interview-top-actions"><button type="button" class="quiet" data-action="toggle-mode" aria-pressed="${teacherMode}">${teacherMode ? 'Volver a estudiante' : 'Activar modo docente'}</button>
       <button type="button" class="quiet" data-action="reset">Reiniciar entrevista</button></div></div>
       ${state.confirmReset ? '<div class="interview-reset" role="group" aria-label="Confirmar reinicio"><p>Se borrarán las preguntas, decisiones y notas de esta entrevista.</p><button type="button" class="quiet" data-action="cancel-reset">Conservar mi avance</button> <button type="button" class="quiet" data-action="confirm-reset">Borrar y comenzar de nuevo</button></div>' : ''}
@@ -185,6 +189,7 @@
       return;
     }
     if (action === 'start') state.phase = 1;
+    if (action === 'urgent' && INTERVIEW.id === 'acute') state.phase = 4;
     if (action === 'back') state.phase = Math.max(0, state.phase - 1);
     if (action === 'next' && currentStage() && askedInStage(currentStage()) >= 2) state.phase++;
     if (action === 'finish' && INTERVIEW.decisions.every(d => state.choices[d.id] !== undefined)) state.phase = 5;
@@ -192,11 +197,16 @@
     if (action === 'revisit') state.phase = 1;
     if (action === 'reset') state.confirmReset = true;
     if (action === 'cancel-reset') state.confirmReset = false;
-    if (action === 'confirm-reset') state = freshState();
+    if (action === 'confirm-reset') { state = freshState(); states.set(INTERVIEW.id, state); }
     render(state.confirmReset ? '[data-action="cancel-reset"]' : '#interview-stage-title');
   });
 
   root.addEventListener('change', event => {
+    if (event.target.id === 'interview-select') {
+      INTERVIEW = INTERVIEWS.find(c => c.id === event.target.value);
+      state = states.get(INTERVIEW.id) || freshState();
+      states.set(INTERVIEW.id, state); selectContent(); render('#interview-stage-title'); return;
+    }
     const id = event.target.dataset.decision;
     if (!id || state.phase !== 4) return;
     const index = Number(event.target.value);

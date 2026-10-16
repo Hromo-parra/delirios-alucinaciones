@@ -68,14 +68,18 @@ Las teorías históricas se identifican como tales. No se reutilizan los detalle
 
 Acceso directo: https://hromo-parra.github.io/delirios-alucinaciones/#entrevista
 
-1. Comenzar la entrevista y seleccionar al menos dos preguntas en cada uno de los tres bloques. La pregunta de seguridad está accesible desde el primero.
+1. Elegir entre Alex (voz y explicación), M. R. (figuras y pérdida visual), J. L. (cambio agudo) y S. V. (significado y flexibilidad). Comenzar la entrevista y seleccionar al menos dos preguntas en cada uno de los tres bloques. La pregunta de seguridad está accesible desde el primero.
 2. Consultar la última respuesta, el registro y el cuaderno de hallazgos. Se puede retroceder sin perder preguntas.
 3. Elegir tres decisiones y, si se desea, escribir un razonamiento breve (máximo 2000 caracteres). No introducir datos reales.
-4. Revisar la devolución: cobertura de cinco dimensiones, primera respuesta y selecciones revisadas. Las omisiones se conservan aunque se acierte una opción.
+4. Revisar la devolución: cobertura de las dimensiones del caso, primera respuesta y selecciones revisadas. Las omisiones se conservan aunque se acierte una opción.
 5. Volver a completar la entrevista o reiniciarla. El reinicio pide confirmación dentro de la actividad y no borra las otras actividades.
 
 El modo docente revela todas las respuestas, objetivos, claves y cierre ficticio. Cambiar de modo conserva el recorrido y las notas. Es un recurso de enseñanza, sin autenticación. El guion es determinista, con respuestas preparadas; no es un chatbot ni una evaluación clínica. La exigencia de dos preguntas es una regla de la actividad, no un estándar de entrevista médica.
 
 La rúbrica es formativa y no ha sido validada. El texto libre no recibe evaluación automática. La impresión general incluye la vista actual de la simulación; el caso completo se puede desplegar al terminar o en modo docente. No se promete guardar avances entre sesiones.
 
-Versión 1.1.0, 15 de octubre de 2026. La versión original permanece en el historial Git.
+Cada entrevista conserva preguntas, decisiones y notas por separado mientras permanezca abierta la pestaña. En J. L. se puede priorizar la atención urgente y pasar a decisiones con datos pendientes: en una situación real no se retrasa la atención para terminar la actividad.
+
+Validación de la ampliación: `node --test tests/*.cjs` (8 pruebas sin dependencias). Los cuatro recorridos se comprobaron en Safari de escritorio y en un viewport de 390 × 780 px CSS; esto no sustituye una prueba en un teléfono físico. Fuentes y límites: [verificación de entrevistas 1.2](docs/entrevistas-1.2-verificacion.md).
+
+Versión 1.2.0, 16 de octubre de 2026. La versión original permanece en el historial Git.

@@ -86,3 +86,7 @@
   .interview-teacher, .interview-rubric article, .interview-exchange { break-inside: avoid; }
   .interview-shell .primary { display: none; }
 }
+
+/* Selector del banco: tamaño legible y adaptación a pantallas pequeñas. */
+#interview-select {display:block; width:100%; max-width:100%; margin:.5rem 0 1.5rem; padding:.8rem; font:inherit; color:inherit; background:var(--paper, #fff); border:1px solid #687e79; border-radius:.4rem;}
+#interview-select:focus-visible {outline:3px solid #b25a28; outline-offset:3px;}
